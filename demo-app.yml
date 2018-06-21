@@ -40,35 +40,35 @@ spec:
     application: demo-app
   type: NodePort
 ---
-- apiVersion: v1
-  kind: Service
-  metadata:
-    labels:
-      application: demo-app
-      version: v1
-    name: demo-app-serviceip
-  spec:
-    ports:
-      - name: external
-        port: 80
-        protocol: TCP
-        targetPort: 3000
-    selector:
-      application: demo-app
-      type: ClusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    application: demo-app
+    version: v1
+  name: demo-app-serviceip
+spec:
+  ports:
+    - name: external
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+  selector:
+    application: demo-app
+    type: ClusterIP
 ---
-- apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    labels:
-      application: demo-app
-    name: demo-app
-  spec:
-    rules:
-      - host: demo-app.k8s.org1.fnebiolo.myinstance.com
-        http:
-          paths:
-            - backend:
-                serviceName: demo-app-serviceip
-                servicePort: 80
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    application: demo-app
+  name: demo-app
+spec:
+  rules:
+    - host: demo-app.k8s.org1.fnebiolo.myinstance.com
+      http:
+        paths:
+          - backend:
+              serviceName: demo-app-serviceip
+              servicePort: 80
 # trigger spinnaker commit
