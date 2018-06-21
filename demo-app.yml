@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: demo-app-deployment
   labels:
-    app: demo-app
+    application: demo-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: demo-app
+      application: demo-app
   template:
     metadata:
       labels:
-        app: demo-app
+        application: demo-app
     spec:
       containers:
       - name: demo-app
@@ -37,7 +37,38 @@ spec:
     port: 3000
     protocol: TCP
   selector:
-    app: demo-app
+    application: demo-app
   type: NodePort
-
+---
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      application: demo-app
+      version: v1
+    name: demo-app-serviceip
+  spec:
+    ports:
+      - name: external
+        port: 80
+        protocol: TCP
+        targetPort: 3000
+    selector:
+      application: demo-app
+      type: ClusterIP
+---
+- apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    labels:
+      application: demo-app
+    name: demo-app
+  spec:
+    rules:
+      - host: demo-app.k8s.org1.fnebiolo.myinstance.com
+        http:
+          paths:
+            - backend:
+                serviceName: demo-app-serviceip
+                servicePort: 80
 # trigger spinnaker commit
