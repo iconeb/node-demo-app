@@ -45,7 +45,6 @@ kind: Service
 metadata:
   labels:
     application: demo-app
-    version: v1
   name: demo-app-serviceip
 spec:
   ports:
@@ -55,7 +54,7 @@ spec:
       targetPort: 3000
   selector:
     application: demo-app
-    type: ClusterIP
+  type: ClusterIP
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
