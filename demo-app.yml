@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: simpledemok8s
   name: demo-app-deployment
   labels:
     application: demo-app
@@ -29,6 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: simpledemok8s
   name: demo-app-service
 spec:
   ports:
@@ -46,6 +48,7 @@ metadata:
   labels:
     application: demo-app
   name: demo-app-serviceip
+  namespace: simpledemok8s
 spec:
   ports:
     - name: external
@@ -62,9 +65,10 @@ metadata:
   labels:
     application: demo-app
   name: demo-app
+  namespace: simpledemok8s
 spec:
   rules:
-    - host: demo-app.k8s.org1.fnebiolo.myinstance.com
+    - host: node-demo-app.simpledemok8s.org1.fnebiolo.myinstance.com
       http:
         paths:
           - backend:
