@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: simpledemok8s
   name: demo-app-deployment
   labels:
     application: demo-app
