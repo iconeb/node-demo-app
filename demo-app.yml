@@ -40,12 +40,14 @@ spec:
     application: demo-app
   type: NodePort
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     application: demo-app
   name: demo-app-serviceip
+  namespace: simpledemok8s
 spec:
   ports:
     - name: external
@@ -59,12 +61,18 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: subnet-036ca717aae34d87c,subnet-05cb69327d7954538,subnet-0740acf28eeb04a3c
+    alb.ingress.kubernetes.io/tags: Environment=dev,Team=test
+    alb.ingress.kubernetes.io/target-type: ip
   labels:
     application: demo-app
   name: demo-app
+  namespace: simpledemok8s
 spec:
   rules:
-    - host: demo-app.k8s.org1.fnebiolo.myinstance.com
+    - host: node-demo-app.simpledemok8s.org1.fnebiolo.myinstance.com
       http:
         paths:
           - backend:
