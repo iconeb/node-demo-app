@@ -4,7 +4,7 @@ module.exports = {
 <!DOCTYPE html>
 <html>
   <head>
-    <title>${text}</title>
+    <title>EMEA Tech</title>
     <meta charset="utf-8">
     <style>
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -24,7 +24,7 @@ module.exports = {
 
 class: center, middle
 
-# ${text}
+${text}
 
     </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js">

@@ -3,7 +3,13 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-  res.send(Library.render('Hello World EMEA Tech!'));
+  res.send(Library.render(`
+# Hello World EMEA Tech!
+---
+# Thank you
+---
+# Q&A
+`));
 });
 
 var server = app.listen(3000, function () {
